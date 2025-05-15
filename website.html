@@ -85,7 +85,7 @@
 
       if (username && password) {
         if (database[username] && database[username] === password) {
-          messageElement.textContent = "Login successful!";
+          window.location.href = 'homepage.html';
         } else {
           messageElement.textContent = "Invalid username or password.";
         }
