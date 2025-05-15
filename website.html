@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Web Application with Login</title>
   <style>
     body {
@@ -53,30 +53,14 @@
     <h1>Login</h1>
     <input type="text" id="username" class="input" placeholder="Username" />
     <input type="password" id="password" class="input" placeholder="Password" />
-    <button class="button" onclick="registerUser()">Register</button>
+    <!-- Register button now redirects to register.html -->
+    <button class="button" onclick="window.location.href='register.html'">Register</button>
     <button class="button" onclick="loginUser()">Login</button>
     <p id="message" class="message"></p>
   </div>
 
   <script>
-    const database = {};
-
-    function registerUser() {
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      const messageElement = document.getElementById('message');
-
-      if (username && password) {
-        if (!database[username]) {
-          database[username] = password;
-          messageElement.textContent = "User registered successfully.";
-        } else {
-          messageElement.textContent = "Username already exists.";
-        }
-      } else {
-        messageElement.textContent = "Please fill in both fields.";
-      }
-    }
+    // Note: database object is removed since we will use LocalStorage on register page for persistent storage
 
     function loginUser() {
       const username = document.getElementById('username').value;
@@ -84,7 +68,8 @@
       const messageElement = document.getElementById('message');
 
       if (username && password) {
-        if (database[username] && database[username] === password) {
+        const users = JSON.parse(localStorage.getItem('users')) || {};
+        if (users[username] && users[username] === password) {
           window.location.href = 'homepage.html';
         } else {
           messageElement.textContent = "Invalid username or password.";
