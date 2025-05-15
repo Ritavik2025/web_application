@@ -50,6 +50,8 @@
 <body>
   <div class="container">
     <h2>Register Account</h2>
+    <input type="text" id="firstName" class="input" placeholder="First Name" />
+    <input type="text" id="lastName" class="input" placeholder="Last Name" />
     <input type="text" id="newUsername" class="input" placeholder="Username" />
     <input type="password" id="newPassword" class="input" placeholder="Password" />
     <button class="button" onclick="registerAccount()">Register</button>
@@ -58,22 +60,24 @@
 
   <script>
     function registerAccount() {
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
       const username = document.getElementById('newUsername').value;
       const password = document.getElementById('newPassword').value;
       const messageElement = document.getElementById('message');
 
-      if (username && password) {
+      if (firstName && lastName && username && password) {
         const users = JSON.parse(localStorage.getItem('users')) || {};
 
         if (!users[username]) {
-          users[username] = password;
+          users[username] = { firstName, lastName, password };
           localStorage.setItem('users', JSON.stringify(users));
           messageElement.textContent = "Registration successful. You can now log in.";
         } else {
           messageElement.textContent = "Username already exists.";
         }
       } else {
-        messageElement.textContent = "Please fill in both fields.";
+        messageElement.textContent = "Please fill in all fields.";
       }
     }
   </script>
