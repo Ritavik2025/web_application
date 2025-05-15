@@ -73,7 +73,7 @@
           users[username] = { firstName, lastName, password };
           localStorage.setItem('users', JSON.stringify(users));
           messageElement.textContent = "Registration successful. You can now log in.";
-          window.location.href = 'website.html';
+          window.location.href = 'login.html';
         } else {
           messageElement.textContent = "Username already exists.";
         }
