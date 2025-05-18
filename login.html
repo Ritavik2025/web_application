@@ -1,111 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Web Application with Login</title>
-  <style>
-    body {
-      background-color: #f3f4f6;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
-    .container {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      width: 300px;
-    }
-    .button {
-      background-color: #3b82f6;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    .button:hover {
-      background-color: #2563eb;
-    }
-    .input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #d1d5db;
-    }
-    .message {
-      margin-top: 15px;
-      color: #374151;
-    }
-  </style>
+    <title>Login</title>
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Login</h1>
-    <input type="text" id="username" class="input" placeholder="Username" />
-    <input type="password" id="password" class="input" placeholder="Password" />
-    <button class="button" onclick="registerUser()">Register</button>
-    <button class="button" onclick="loginUser()">Login</button>
-    <p id="message" class="message"></p>
-  </div>
+    <h2>Login</h2>
+    <form id="loginForm">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required><br>
 
-  <script>
-    function registerUser() {
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      const messageElement = document.getElementById('message');
+        <label for="password">Password:</label>
+        <input type="password" id="password" required><br>
 
-      if (username && password) {
-        fetch('/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ username, password })
-        })
-        .then(response => response.json())
-        .then(data => {
-          messageElement.textContent = data.message;
-        });
-      } else {
-        messageElement.textContent = "Please fill in both fields.";
-      }
-    }
+        <button type="submit">Login</button>
+    </form>
 
-    function loginUser() {
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      const messageElement = document.getElementById('message');
-
-      if (username && password) {
-        fetch('/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ username, password })
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            window.location.href = 'homepage.html';
-          } else {
-            messageElement.textContent = data.message;
-          }
-        });
-      } else {
-        messageElement.textContent = "Please fill in both fields.";
-      }
-    }
-  </script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
